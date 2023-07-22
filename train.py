@@ -9,7 +9,8 @@ def EstimatePrice(mileage, th0, th1):
 
 def calc_precision(data, th0, th1):
     prediction = EstimatePrice(data['km'], th0, th1)
-    mean = (prediction - data['price']).abs().mean()
+    abs_diff = [x if x > 0 else -x for x in prediction - data['price']]
+    mean = sum(map(float,abs_diff))
     return mean
 
 def normalize_data(df):
@@ -52,7 +53,6 @@ def train(args):
             thetas = np.append(thetas, [[th0, th1]], axis=0)
 
     best_epoch = precision.argmin()
-    #print (best_epoch, precision[best_epoch])
     th0 = thetas[best_epoch, 0]
     th1 = thetas[best_epoch, 1]
 
@@ -70,6 +70,8 @@ def train(args):
         plt.axvline(x = best_epoch, color = 'r', alpha=0.5, label = 'best epoch')
         plt.plot(range(len(precision)), precision * maxs['price'] + mins['price'], '.',
             label="error evolution")
+        plt.xlabel('epochs')
+        plt.ylabel('precision')
         plt.legend()
         plt.savefig("model_evolution.png")
 

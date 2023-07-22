@@ -18,4 +18,6 @@ try:
 except:
     print ("No previous training")
 
-print ("Estimated price is " + str(EstimatePrice(milage, th0, th1)))
+ep = EstimatePrice(milage, th0, th1)
+
+print ("Estimated price is " + str())
