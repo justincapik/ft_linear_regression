@@ -59,8 +59,8 @@ def train(args):
     prediction = EstimatePrice(data['km'], th0, th1)
 
     if args.plot:
-        plt.plot(raw_data['km'], prediction * maxs['price'] + mins['price'], label="raw data")
-        plt.plot(raw_data['km'], raw_data['price'], 'o', label="prediction")
+        plt.plot(raw_data['km'], prediction * maxs['price'] + mins['price'], label="prediction")
+        plt.plot(raw_data['km'], raw_data['price'], 'o', label="raw data")
         plt.xlabel('km')
         plt.ylabel('price')
         plt.legend()
