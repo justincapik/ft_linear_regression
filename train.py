@@ -77,7 +77,8 @@ def train(args):
 
     if not args.noout:
         with open("thetas.txt", "w") as file:
-            file.write("{}\n{}".format(th0, th1))
+            file.write("{}\n{}\n{} - {}\n{} - {}\n".format(th0, th1,
+                mins['km'], mins['price'], maxs['km'], maxs['price']))
 
 def get_arguments():
     parser = argparse.ArgumentParser()
@@ -86,5 +87,6 @@ def get_arguments():
     args = parser.parse_args()
     return args
 
-args = get_arguments()
-train(args)
+if __name__ == '__main__': 
+    args = get_arguments()
+    train(args)
